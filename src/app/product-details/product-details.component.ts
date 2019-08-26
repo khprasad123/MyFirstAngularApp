@@ -16,7 +16,10 @@ export class ProductDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params=>{
     this.product=products[0];
     for (let entry of products) {
-        
+        if(entry.id==+params.get('productId')){
+            this.product=entry;
+            break;
+        }
 
     }
     });
