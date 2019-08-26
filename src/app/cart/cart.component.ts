@@ -13,10 +13,24 @@ import { CartService } from '../cart.service';
 })
 export class CartComponent implements OnInit {
   items;
-  constructor(private cartService: CartService) { }
+  checkoutForm;
+  constructor(
+    private cartService: CartService,
+    private formBuilder: FormBuilder,) { }
 
   ngOnInit() {
     this.items=this.cartService.getItems();
+     this.checkoutForm = this.formBuilder.group({
+      name: 'Hari',
+      address: 'Kottarathil'
+    });
+  }
+
+  onSubmit(customerData) {
+    // Process checkout data here
+    window.alert('Your order has been submitted \n name : '+customerData['name']+"\n address : "+customerData['address']);
+    this.items = this.cartService.clearCart();
+    this.checkoutForm.reset();
   }
 
 }
